@@ -3,14 +3,14 @@ import SearchHeader from '../components/SearchHeader.vue'
 </script>
 
 <template>
-  <main className="main-container">
-    <div className="parent">
-      <div className="left-column">
-        <h1 id="main-logo">COIN AVERAGE</h1>
+  <main class="main-container">
+    <div class="parent">
+      <div class="left-column">
+        <h1 class="va-h1">COIN AVERAGE</h1>
         <!-- Left Side Bar -->
       </div>
-      <div className="center-column">Crypto Tables</div>
-      <div className="right-column">
+      <div class="center-column">Crypto Tables</div>
+      <div class="right-column">
         <section>
           <SearchHeader />
         </section>

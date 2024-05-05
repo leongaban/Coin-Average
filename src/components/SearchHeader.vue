@@ -7,6 +7,10 @@ const inputValue = ref('')
 const filteredCoins = ref<Coin[]>([])
 
 watch(inputValue, (newValue: string) => {
+  if (newValue.length === 0) {
+    filterCoins('  ')
+  }
+
   if (newValue.length > 1) {
     filterCoins(newValue)
   }
@@ -14,13 +18,15 @@ watch(inputValue, (newValue: string) => {
 })
 
 const filterCoins = (input: string) => {
-  filteredCoins.value = coins_to_search.filter(coin =>
-    coin.name.toLowerCase().includes(input.toLowerCase())
+  filteredCoins.value = coins_to_search.filter(
+    coin =>
+      coin.name.toLowerCase().includes(input.toLowerCase()) ||
+      coin.id.toLowerCase().includes(input.toLowerCase())
   )
 }
 
 // Initialize filteredCoins with an empty array
-filterCoins('')
+filterCoins('  ')
 </script>
 
 <template>
@@ -31,8 +37,16 @@ filterCoins('')
           type="text"
           color="default"
           label="Coin Search"
+          placeholder="Search Coins"
           v-model="inputValue"
         />
+        <div v-if="filteredCoins.length > 0" class="search-selection">
+          <ul>
+            <li v-for="coin in filteredCoins" :key="coin.id">
+              {{ coin.name }}
+            </li>
+          </ul>
+        </div>
       </div>
     </header>
   </div>

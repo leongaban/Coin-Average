@@ -7,3 +7,19 @@
     border-radius: 1rem;
   }
 }
+
+.search-selection {
+  margin-top: -1rem;
+  padding: 1.5rem 1rem 1rem 1rem;
+  width: 234px;
+  border: 1px solid black;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+
+  li {
+    margin: 1rem 0;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
