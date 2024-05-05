@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, defineEmits } from 'vue'
 import coins_to_search from '../constants/coins-to-search'
 import type { Coin } from '../constants/coins-to-search'
 
+const emit = defineEmits(['coinSelected'])
 const inputValue = ref('')
 const filteredCoins = ref<Coin[]>([])
 
@@ -25,6 +26,15 @@ const filterCoins = (input: string) => {
   )
 }
 
+const selectCoin = (value: string) => {
+  console.group('SearchHeader')
+  console.log(value)
+  if (value) {
+    emit('coinSelected', value)
+  }
+  filterCoins('  ')
+}
+
 // Initialize filteredCoins with an empty array
 filterCoins('  ')
 </script>
@@ -42,7 +52,11 @@ filterCoins('  ')
         />
         <div v-if="filteredCoins.length > 0" class="search-selection">
           <ul>
-            <li v-for="coin in filteredCoins" :key="coin.id">
+            <li
+              v-for="coin in filteredCoins"
+              :key="coin.id"
+              @click="selectCoin(coin.name)"
+            >
               {{ coin.name }}
             </li>
           </ul>

@@ -1,5 +1,17 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { useToast } from 'vue-toastification'
 import SearchHeader from '../components/SearchHeader.vue'
+
+const selectedCoinName = ref('')
+const toast = useToast()
+
+const handleCoinSelected = (value: string) => {
+  console.group('Dashboard')
+  selectedCoinName.value = value
+  console.log('selectedCoinName', selectedCoinName.value)
+  toast.success(`Start tracking your ${selectedCoinName.value} portfolio!`)
+}
 </script>
 
 <template>
@@ -12,7 +24,7 @@ import SearchHeader from '../components/SearchHeader.vue'
       <div class="center-column">Crypto Tables</div>
       <div class="right-column">
         <section>
-          <SearchHeader />
+          <SearchHeader @coinSelected="handleCoinSelected" />
         </section>
       </div>
     </div>
