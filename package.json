@@ -16,7 +16,8 @@
   "dependencies": {
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vuestic-ui": "^1.9.9"
   },
   "devDependencies": {
     "@tsconfig/node20": "^20.1.4",
@@ -32,6 +33,7 @@
     "npm-run-all2": "^6.1.2",
     "postcss-cssnext": "^3.1.1",
     "postcss-nested": "^6.0.1",
+    "prettier": "^3.2.5",
     "sass": "^1.76.0",
     "sass-loader": "^14.2.1",
     "start-server-and-test": "^2.0.3",
