@@ -2,6 +2,7 @@
   padding: 2rem;
 
   h1 {
+    margin-top: 0;
     font-weight: 700;
   }
 }
@@ -16,15 +17,20 @@
 
 .left-column {
   grid-area: 1 / 1 / 6 / 2;
-  // background: orange;
 }
+
 .center-column {
   grid-area: 1 / 2 / 6 / 5;
-  background: yellow;
 }
+
 .right-column {
   grid-area: 1 / 5 / 6 / 6;
-  background: pink;
+  // background: pink;
+}
+
+.center-column,
+.right-column {
+  padding-top: 1rem;
 }
 
 // @media (min-width: 1280px) {
