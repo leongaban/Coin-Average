@@ -1,0 +1,23 @@
+@property --blue-light {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #1c2a3b;
+}
+
+@property --blue-mid {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #131e2a;
+}
+
+@property --blue-dark {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #0f1b27;
+}
+
+@property --blue-bright {
+  syntax: '<color>';
+  inherits: false;
+  initial-value: #0094ff;
+}

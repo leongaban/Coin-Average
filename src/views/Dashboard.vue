@@ -3,14 +3,13 @@
 
 <template>
   <main className="main-container">
-    <h1>This is the dashboard</h1>
     <div className="parent">
-      <div className="div1">
-        <p id="main-logo">COIN AVERAGE</p>
+      <div className="left-column">
+        <h1 id="main-logo">COIN AVERAGE</h1>
         Left Side Bar
       </div>
-      <div className="div2">Table Columns</div>
-      <div className="div3">
+      <div className="center-column">Table Columns</div>
+      <div className="right-column">
         <section>
           <SearchHeader />
         </section>

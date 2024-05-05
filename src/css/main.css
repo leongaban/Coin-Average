@@ -1,31 +1,27 @@
-@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-/* @import url(dashboard); */
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+@import "colors.scss";
 @import "dashboard.scss";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+  color: #f0f0f0;
+  background: var(--blue-dark);
+}
+
 #app {
-  max-width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
-  background: blue;
+  /* background: cyan; */
 }
 
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
-  }
-}
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-    font-family: 'Lato', sans-serif;
-    font-size: 18px;
-    text-rendering: optimizeLegibility;
   }
 }
