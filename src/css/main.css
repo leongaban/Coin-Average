@@ -2,10 +2,6 @@
 @import 'dashboard.scss';
 @import 'search.scss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 body {
   margin: 0;
   padding: 0;
