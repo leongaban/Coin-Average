@@ -19,6 +19,7 @@ watch(inputValue, (newValue: string) => {
 })
 
 const filterCoins = (input: string) => {
+  console.log('filterCoins', input)
   filteredCoins.value = coins_to_search.filter(
     coin =>
       coin.name.toLowerCase().includes(input.toLowerCase()) ||
@@ -26,17 +27,20 @@ const filterCoins = (input: string) => {
   )
 }
 
+const resetSearchInput = () => {
+  inputValue.value = ''
+  filterCoins('  ')
+}
+
 const selectCoin = (value: string) => {
   console.group('SearchHeader')
   console.log(value)
   if (value) {
     emit('coinSelected', value)
+    resetSearchInput()
   }
-  filterCoins('  ')
 }
 
-// Initialize filteredCoins with an empty array
-filterCoins('  ')
 </script>
 
 <template>
