@@ -10,6 +10,20 @@ const props = defineProps({
   },
 })
 
+const formatPrice = (price: number | undefined): string => {
+  if (price !== undefined) {
+    // Check if the price is less than 1
+    if (price < 1) {
+      // Return the price without any formatting
+      return price.toString()
+    } else {
+      // Format the price with commas for thousands separators and 2 decimal places, and add $ sign
+      return `$${price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+    }
+  }
+  return ''
+}
+
 watch(props.portfolio, (newValue: Coin[]) => {
   console.group('Tables')
   portfolioCoins.value = newValue as Coin[]
@@ -24,7 +38,7 @@ console.log('Portfolio:', props.portfolio)
     <header>
       <div class="portfolio-tags">
         <div v-for="coin in portfolioCoins" :key="coin.id" class="tag">
-          {{ coin.symbol.toUpperCase() }}
+          {{ coin.symbol.toUpperCase() }} ({{ formatPrice(coin.price) }})
         </div>
       </div>
     </header>
