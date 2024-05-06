@@ -6,8 +6,8 @@ const portfolioCoins = ref<Coin[]>([])
 const props = defineProps({
   portfolio: {
     type: Array as () => Coin[],
-    required: true
-  }
+    required: true,
+  },
 })
 
 watch(props.portfolio, (newValue: Coin[]) => {
@@ -24,7 +24,9 @@ console.log('Portfolio:', props.portfolio)
   <div id="tables-container">
     <header>
       <div class="portfolio-tags">
-        <div v-for="coin in portfolioCoins" :key="coin.id" class="tag">{{ coin.symbol.toUpperCase() }}</div>
+        <div v-for="coin in portfolioCoins" :key="coin.id" class="tag">
+          {{ coin.symbol.toUpperCase() }}
+        </div>
       </div>
     </header>
   </div>

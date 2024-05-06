@@ -22,7 +22,7 @@ const filterCoins = (input: string) => {
     coin =>
       coin.name.toLowerCase().includes(input.toLowerCase()) ||
       coin.id.toLowerCase().includes(input.toLowerCase()) ||
-      coin.symbol.toLowerCase().includes(input.toLowerCase())
+      coin.symbol.toLowerCase().includes(input.toLowerCase()),
   )
 }
 
@@ -37,32 +37,27 @@ const selectCoin = (coin: Coin) => {
     resetSearchInput()
   }
 }
-
 </script>
 
 <template>
   <div id="search-container">
-    <header class="flex items-center justify-between">
-      <div class="flex w-full flex-wrap md:flex-nowrap gap-4">
-        <input
-          type="text"
-          color="default"
-          label="Coin Search"
-          placeholder="Search Coins"
-          v-model="inputValue"
-        />
-        <div v-if="filteredCoins.length > 0" class="search-selection">
-          <ul>
-            <li
-              v-for="coin in filteredCoins"
-              :key="coin.id"
-              @click="selectCoin(coin)"
-            >
-              {{ coin.name }}
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
+    <input
+      type="text"
+      color="default"
+      label="Coin Search"
+      placeholder="Search Coins"
+      v-model="inputValue"
+    />
+    <div v-if="filteredCoins.length > 0" class="search-selection">
+      <ul>
+        <li
+          v-for="coin in filteredCoins"
+          :key="coin.id"
+          @click="selectCoin(coin)"
+        >
+          {{ coin.name }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>

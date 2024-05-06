@@ -21,19 +21,23 @@ const handleCoinSelected = (value: Coin) => {
 </script>
 
 <template>
-  <main class="main-container">
-    <div class="parent">
-      <div class="left-column">
-        <h1 class="va-h1">COIN AVERAGE</h1>
+  <div class="big-parent">
+    <div></div>
+    <main class="main-container">
+      <div class="parent">
+        <div class="left-column">
+          <h1 class="va-h1">COIN AVERAGE</h1>
+        </div>
+        <div class="center-column">
+          <TablesContainer :portfolio="portfolioCoins" />
+        </div>
+        <div class="right-column">
+          <section>
+            <SearchHeader @coinSelected="handleCoinSelected" />
+          </section>
+        </div>
       </div>
-      <div class="center-column">
-        <TablesContainer :portfolio="portfolioCoins"/>
-      </div>
-      <div class="right-column">
-        <section>
-          <SearchHeader @coinSelected="handleCoinSelected" />
-        </section>
-      </div>
-    </div>
-  </main>
+    </main>
+    <div></div>
+  </div>
 </template>
