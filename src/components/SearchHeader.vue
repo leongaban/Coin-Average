@@ -15,15 +15,14 @@ watch(inputValue, (newValue: string) => {
   if (newValue.length > 1) {
     filterCoins(newValue)
   }
-  console.log('filteredCoins', filteredCoins.value)
 })
 
 const filterCoins = (input: string) => {
-  console.log('filterCoins', input)
   filteredCoins.value = coins_to_search.filter(
     coin =>
       coin.name.toLowerCase().includes(input.toLowerCase()) ||
-      coin.id.toLowerCase().includes(input.toLowerCase())
+      coin.id.toLowerCase().includes(input.toLowerCase()) ||
+      coin.symbol.toLowerCase().includes(input.toLowerCase())
   )
 }
 
@@ -32,11 +31,9 @@ const resetSearchInput = () => {
   filterCoins('  ')
 }
 
-const selectCoin = (value: string) => {
-  console.group('SearchHeader')
-  console.log(value)
-  if (value) {
-    emit('coinSelected', value)
+const selectCoin = (coin: Coin) => {
+  if (coin) {
+    emit('coinSelected', coin)
     resetSearchInput()
   }
 }
@@ -59,7 +56,7 @@ const selectCoin = (value: string) => {
             <li
               v-for="coin in filteredCoins"
               :key="coin.id"
-              @click="selectCoin(coin.name)"
+              @click="selectCoin(coin)"
             >
               {{ coin.name }}
             </li>
