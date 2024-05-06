@@ -1,20 +1,28 @@
-.portfolio-tags {
-  padding-top: 0.25rem;
+#tables-container {
+  display: flex;
+  flex-direction: column;
+}
 
-  p, .tag {
-    float: left;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-  }
+.va-table-responsive {
+  margin-bottom: 1rem;
+  width: 100%;
 
   p {
-    margin-top: 0.5rem;
+    font-size: 1rem;
   }
+}
 
-  .tag {
-    padding: 0.5rem 1rem;
-    background: #ededed;
-    border-radius: 8px;
-  }
+.table-columns {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.coin-table {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  padding: 0.5rem 1rem;
+  background: #fff;
+  border-radius: 8px;
 }
