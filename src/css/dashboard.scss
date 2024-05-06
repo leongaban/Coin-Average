@@ -1,6 +1,6 @@
 .big-parent {
   display: grid;
-  grid-template-columns: 1fr minmax(90%, auto) 1fr; /* Middle column takes up at least 90% */
+  grid-template-columns: 1fr minmax(90%, auto) 1fr;
   grid-template-rows: 1fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
@@ -37,25 +37,24 @@
   grid-area: 1 / 5 / 6 / 6;
 }
 
-/* Add media query to adjust layout for window size 1000px */
 @media (max-width: 1000px) {
   .parent {
-    grid-template-rows: repeat(2, 1fr); /* Reduce to two rows */
-    grid-template-columns: repeat(2, 1fr); /* Reduce to two columns */
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .left-column {
-    grid-area: 1 / 1 / 2 / 3; /* Update grid area for left column */
+    grid-area: 1 / 1 / 2 / 3;
   }
 
   .right-column {
-    grid-area: 1 / 2 / 2 / 3; /* Update grid area for right column */
+    grid-area: 1 / 2 / 2 / 3;
     position: absolute;
     top: 6rem;
   }
 
   .center-column {
-    grid-area: 2 / 1 / 3 / 3; /* Update grid area for center column */
+    grid-area: 2 / 1 / 3 / 3;
     margin-top: 2.5rem;
   }
 }
