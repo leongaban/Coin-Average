@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUpdated, watch } from 'vue'
 import { useToast } from 'vue-toastification'
 import SearchHeader from '../components/SearchHeader.vue'
 import TablesContainer from '../components/TablesContainer.vue'
@@ -12,16 +12,18 @@ const KEY_NAME: string = import.meta.env.VITE_CG_API_KEY_NAME || ''
 const API_KEY: string = import.meta.env.VITE_CG_API_KEY || ''
 
 const selectedCoin = ref<Coin>()
-// const portfolioCoins = ref<Coin[]>([])
 const toast = useToast()
 
 onMounted(() => {
-  // Check if there are any coins in the store and update the ref
-  // portfolioCoins.value = coinsStore.coins.length > 0 ? coinsStore.coins : []
+  coinsStore.getCoins()
+})
+
+onUpdated(() => {
   console.log('coinsStore.coins', coinsStore.coins)
 })
 
 const fetchCoinData = async (id: string): Promise<number | null> => {
+  const errorMessage = `Failed to fetch current price for ${id}.`
   try {
     const response = await fetch(
       `https://api.coingecko.com/api/v3/coins/${id}?${KEY_NAME}=${API_KEY}`,
@@ -30,7 +32,8 @@ const fetchCoinData = async (id: string): Promise<number | null> => {
     const currentPriceUSD = json?.market_data?.current_price?.usd
     return currentPriceUSD || null
   } catch (error) {
-    console.error('Error fetching coin data:', error)
+    console.error(errorMessage)
+    toast.error(errorMessage)
     return null
   }
 }
@@ -76,6 +79,9 @@ const handleCoinSelected = async (value: Coin) => {
           <h1 class="va-h1">COIN AVERAGE</h1>
         </div>
         <div class="center-column">
+          <div class="loading" v-if="coinsStore.loadingCoins">
+            Loading coin...
+          </div>
           <TablesContainer :portfolio="coinsStore.coins" />
         </div>
         <div class="right-column">

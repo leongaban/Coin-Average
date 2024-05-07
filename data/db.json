@@ -24,6 +24,16 @@
       "id": "dogecoin",
       "name": "Dogecoin",
       "symbol": "doge"
+    },
+    {
+      "id": "litecoin",
+      "name": "Litecoin",
+      "symbol": "ltc"
+    },
+    {
+      "id": "tron",
+      "name": "Tron",
+      "symbol": "trx"
     }
   ]
 }

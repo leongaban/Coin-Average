@@ -4,6 +4,7 @@ import type { Coin } from '../constants/coins-to-search'
 
 export const useCoinsStore = defineStore('coinsStore', () => {
   const name = 'coinsStore'
+  let loadingCoins = ref(false)
   let coins = ref<Coin[]>([])
 
   // ? Total Portfolio Value
@@ -13,9 +14,10 @@ export const useCoinsStore = defineStore('coinsStore', () => {
 
   const getCoins = async () => {
     try {
+      loadingCoins.value = true
       const res = await fetch('http://localhost:3000/coins')
       const data = await res.json()
-
+      loadingCoins.value = false
       coins.value = data
     } catch (error) {
       console.error(error)
@@ -23,18 +25,25 @@ export const useCoinsStore = defineStore('coinsStore', () => {
   }
 
   // ? Add Coin
-  const addCoin = async (coin: Coin) => {
-    // Check if the coin already exists in the array
+  const addCoin = async (coin: Coin): Promise<boolean> => {
     const exists = coins.value.some(existingCoin => existingCoin.id === coin.id)
     if (!exists) {
-      coins.value.push(coin)
+      // Create a new array with the new coin added, replacing the old array
+      coins.value = [...coins.value, coin]
 
-      await fetch('http://localhost:3000/coins', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(coin),
-      })
-
+      loadingCoins.value = true
+      try {
+        await fetch('http://localhost:3000/coins', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(coin),
+        })
+      } catch (error) {
+        console.error('Failed to save coin:', error)
+        loadingCoins.value = false
+        return false
+      }
+      loadingCoins.value = false
       return true
     } else {
       console.warn('Attempted to add a coin that already exists:', coin.name)
@@ -60,6 +69,7 @@ export const useCoinsStore = defineStore('coinsStore', () => {
 
   return {
     name,
+    loadingCoins,
     coins,
     totalValue,
     getCoins,

@@ -4,17 +4,13 @@ import type { Coin } from '../constants/coins-to-search'
 import TableColumn from './TableColumn.vue'
 import { useCoinsStore } from '../stores/coins'
 
-// Access the coins store
 const coinsStore = useCoinsStore()
 
-// Define props to receive the coins array
 const props = defineProps<{
   portfolio: Coin[]
 }>()
 
-// Define a method to handle removal of a coin
 const onRemoveCoin = (coinToRemove: Coin) => {
-  // Instead of managing a local state, directly use the store's method to remove a coin
   coinsStore.removeCoin(coinToRemove)
 }
 </script>
