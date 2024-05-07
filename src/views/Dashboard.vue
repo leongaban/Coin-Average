@@ -32,8 +32,8 @@ const handleCoinSelected = async (value: Coin) => {
   const { name: coinName, id } = searchedCoin
   portfolioCoins.value.push(searchedCoin)
   toast.success(`Start tracking ${coinName} in your portfolio!`)
-  console.group('Dashboard')
-  console.log('searchedCoin', searchedCoin)
+  // console.group('Dashboard')
+  // console.log('searchedCoin', searchedCoin)
 
   // const fetchPromises: Promise<any>[] = portfolioCoins.value.map(coin =>
   //   fetchCoinData(coin.name),

@@ -41,10 +41,12 @@
   .parent {
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
+    height: 150px;
   }
 
   .left-column {
     grid-area: 1 / 1 / 2 / 3;
+    height: 120px;
   }
 
   .right-column {

@@ -26,3 +26,32 @@
   background: #fff;
   border-radius: 8px;
 }
+
+.td-date,
+.td-amount,
+.td-price {
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.8rem;
+  }
+}
+
+.td-total {
+  padding-top: 1rem !important;
+  font-size: 1.2rem;
+}
+
+.td-button {
+  button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .coin-table {
+    width: 100%;
+  }
+}
