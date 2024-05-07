@@ -1,0 +1,10 @@
+{
+  "coins": [
+    {
+      "id": "default",
+      "name": "Default from DB",
+      "symbol": "def",
+      "price": 100000
+    }
+  ]
+}

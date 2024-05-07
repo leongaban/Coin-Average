@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import coins_to_search from '../constants/coins-to-search'
 import type { Coin } from '../constants/coins-to-search'
 import { useCoinsStore } from '../stores/coins'
@@ -9,6 +9,10 @@ const coinsStore = useCoinsStore()
 const emit = defineEmits(['coinSelected'])
 const inputValue = ref('')
 const filteredCoins = ref<Coin[]>([])
+
+onMounted(() => {
+  coinsStore.getCoins()
+})
 
 watch(inputValue, (newValue: string) => {
   if (newValue.length === 0) {

@@ -4,12 +4,23 @@ import type { Coin } from '../constants/coins-to-search'
 
 export const useCoinsStore = defineStore('coinsStore', () => {
   const name = 'coinsStore'
-  const coins = ref<Coin[]>([])
+  let coins = ref<Coin[]>([])
 
   // ? Total Portfolio Value
   const totalValue = computed(() =>
     coins.value.reduce((acc, coin: Coin) => acc + (coin.total ?? 0), 0),
   )
+
+  const getCoins = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/coins')
+      const data = await res.json()
+
+      coins.value = data
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   // ? Add Coin
   const addCoin = (coin: Coin) => coins.value.push(coin)
@@ -22,5 +33,5 @@ export const useCoinsStore = defineStore('coinsStore', () => {
     }
   }
 
-  return { name, coins, totalValue, addCoin, removeCoin }
+  return { name, coins, totalValue, getCoins, addCoin, removeCoin }
 })
