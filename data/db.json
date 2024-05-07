@@ -6,34 +6,9 @@
       "symbol": "btc"
     },
     {
-      "id": "ethereum",
-      "name": "Ethereum",
-      "symbol": "eth"
-    },
-    {
       "id": "solana",
       "name": "Solana",
       "symbol": "sol"
-    },
-    {
-      "id": "ethereum",
-      "name": "Ethereum",
-      "symbol": "eth"
-    },
-    {
-      "id": "dogecoin",
-      "name": "Dogecoin",
-      "symbol": "doge"
-    },
-    {
-      "id": "litecoin",
-      "name": "Litecoin",
-      "symbol": "ltc"
-    },
-    {
-      "id": "tron",
-      "name": "Tron",
-      "symbol": "trx"
     }
   ]
 }

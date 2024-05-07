@@ -60,10 +60,18 @@ export const useCoinsStore = defineStore('coinsStore', () => {
   }
 
   // ? Remove Coin
-  const removeCoin = (coin: Coin) => {
+  const removeCoin = async (coin: Coin) => {
     const index = coins.value.findIndex(c => c.id === coin.id)
     if (index !== -1) {
       coins.value.splice(index, 1)
+    }
+
+    const res = await fetch(`http://localhost:3000/coins/${coin.id}`, {
+      method: 'DELETE',
+    })
+
+    if (!res.ok) {
+      console.error(res.statusText)
     }
   }
 
