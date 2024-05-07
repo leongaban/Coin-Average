@@ -29,6 +29,10 @@ button {
   margin-top: 2rem;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .source-code-pro {
   font-family: 'Source Code Pro', monospace;
   font-optical-sizing: auto;

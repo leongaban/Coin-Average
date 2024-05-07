@@ -26,6 +26,12 @@ watch(props.portfolio, (newValue: Coin[]) => {
 <template>
   <div id="tables-container">
     <div class="table-columns">
+      <div v-if="portfolioCoins.length === 0" class="empty-portfolio">
+        <p class="text-center">
+          Your portfolio is empty. Search for a coin to add it to your
+          portfolio.
+        </p>
+      </div>
       <div v-for="coin in portfolioCoins" :key="coin.id" class="coin-table">
         <TableColumn :coin="coin" />
       </div>
