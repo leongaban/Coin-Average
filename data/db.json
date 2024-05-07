@@ -5,6 +5,17 @@
       "name": "Default from DB",
       "symbol": "def",
       "price": 100000
+    },
+    {
+      "id": "bitcoin",
+      "name": "Bitcoin",
+      "symbol": "btc"
+    },
+    {
+      "id": "bitcoin",
+      "name": "Bitcoin",
+      "symbol": "btc",
+      "price": 63023
     }
   ]
 }

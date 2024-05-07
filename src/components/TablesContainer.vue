@@ -16,8 +16,8 @@ const props = defineProps({
 })
 
 watch(props.portfolio, (newValue: Coin[]) => {
-  console.group('Tables')
   portfolioCoins.value = newValue as Coin[]
+  console.group('Tables')
   console.log('portfolioCoins:', portfolioCoins.value)
   console.log('coinStore', coinsStore.coins)
 })

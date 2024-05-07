@@ -16,6 +16,29 @@
   width: 100%;
 }
 
+.table-col-header {
+  display: flex;
+  align-items: center;
+
+  h2 {
+    margin-right: 10px; /* Add space between elements */
+  }
+}
+
+.btn-remove-coin {
+  margin-left: auto;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  font-size: 0.8rem;
+
+  &:hover {
+    background: #f8f8f8;
+  }
+}
+
+/* Adjust margins or paddings as needed */
+
 .table-columns {
   display: flex;
   flex-wrap: wrap;

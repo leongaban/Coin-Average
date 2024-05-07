@@ -25,7 +25,10 @@ const props = defineProps<{
 
 <template>
   <div class="va-table-responsive">
-    <h2>{{ coin.name }}</h2>
+    <div class="table-col-header">
+      <h2>{{ coin.name }}</h2>
+      <button class="btn-remove-coin">Remove Coin</button>
+    </div>
     <p>Current price: {{ formatPrice(coin.price) }}</p>
     <table class="va-table">
       <thead>
