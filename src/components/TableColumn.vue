@@ -6,6 +6,7 @@ import { formatPrice } from '../utils/formatters'
 
 const amountVal = ref('')
 const priceVal = ref('')
+const emits = defineEmits(['remove'])
 
 const total = computed(() => {
   const amount = Number(amountVal.value)
@@ -18,6 +19,8 @@ const total = computed(() => {
   return formatPrice(amount * price)
 })
 
+const removeCoin = () => emits('remove', props.coin)
+
 const props = defineProps<{
   coin: Coin
 }>()
@@ -27,7 +30,7 @@ const props = defineProps<{
   <div class="va-table-responsive">
     <div class="table-col-header">
       <h2>{{ coin.name }}</h2>
-      <button class="btn-remove-coin">Remove Coin</button>
+      <button class="btn-remove-coin" @click="removeCoin">Remove Coin</button>
     </div>
     <p>Current price: {{ formatPrice(coin.price) }}</p>
     <table class="va-table">

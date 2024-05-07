@@ -15,6 +15,16 @@ const props = defineProps({
   },
 })
 
+const onRemoveCoin = (coinToRemove: Coin) => {
+  // Remove the coin from the local state
+  portfolioCoins.value = portfolioCoins.value.filter(
+    coin => coin.id !== coinToRemove.id,
+  )
+  console.log('Coin removed:', coinToRemove)
+  console.log('portfolioCoins:', portfolioCoins.value)
+  // You can also update other states or stores if necessary
+}
+
 watch(props.portfolio, (newValue: Coin[]) => {
   portfolioCoins.value = newValue as Coin[]
   console.group('Tables')
@@ -33,7 +43,7 @@ watch(props.portfolio, (newValue: Coin[]) => {
         </p>
       </div>
       <div v-for="coin in portfolioCoins" :key="coin.id" class="coin-table">
-        <TableColumn :coin="coin" />
+        <TableColumn :coin="coin" @remove="onRemoveCoin" />
       </div>
     </div>
   </div>
