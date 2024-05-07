@@ -51,3 +51,9 @@ pre {
   white-space: pre-wrap;
   min-height: 500px;
 }
+
+@media (max-width: 1000px) {
+  .source-code-pro {
+    display: none;
+  }
+}
