@@ -28,7 +28,6 @@ export const useCoinsStore = defineStore('coinsStore', () => {
   const addCoin = async (coin: Coin): Promise<boolean> => {
     const exists = coins.value.some(existingCoin => existingCoin.id === coin.id)
     if (!exists) {
-      // Create a new array with the new coin added, replacing the old array
       coins.value = [...coins.value, coin]
 
       loadingCoins.value = true
@@ -75,6 +74,26 @@ export const useCoinsStore = defineStore('coinsStore', () => {
     }
   }
 
+  // ? Reset State
+  const resetState = async () => {
+    const currentCoins = [...coins.value]
+    for (const coin of currentCoins) {
+      try {
+        const res = await fetch(`http://localhost:3000/coins/${coin.id}`, {
+          method: 'DELETE',
+        })
+        if (!res.ok) throw new Error(res.statusText)
+
+        const index = coins.value.findIndex(c => c.id === coin.id)
+        if (index !== -1) {
+          coins.value.splice(index, 1)
+        }
+      } catch (error) {
+        console.error('Failed to delete coin:', coin.name, error)
+      }
+    }
+  }
+
   return {
     name,
     loadingCoins,
@@ -84,5 +103,6 @@ export const useCoinsStore = defineStore('coinsStore', () => {
     addCoin,
     updateCoinPrice,
     removeCoin,
+    resetState,
   }
 })

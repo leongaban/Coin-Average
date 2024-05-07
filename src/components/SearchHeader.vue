@@ -67,6 +67,9 @@ const selectCoin = (coin: Coin) => {
         <h4>Pinia state: {{ coinsStore.name }}</h4>
         <p v-for="coin in coinsStore.coins">{{ coin }}</p>
       </pre>
+      <button @click="coinsStore.resetState" class="btn-reset-state">
+        Reset state
+      </button>
     </div>
   </div>
 </template>

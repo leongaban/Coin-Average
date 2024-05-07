@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUpdated, watch } from 'vue'
+import { storeToRefs } from 'pinia'
+import { ref, onMounted, onUpdated } from 'vue'
 import { useToast } from 'vue-toastification'
 import SearchHeader from '../components/SearchHeader.vue'
 import TablesContainer from '../components/TablesContainer.vue'
@@ -7,6 +8,7 @@ import type { Coin } from '../constants/coins-to-search'
 import { useCoinsStore } from '../stores/coins'
 
 const coinsStore = useCoinsStore()
+const { coins, loadingCoins } = storeToRefs(coinsStore)
 
 const KEY_NAME: string = import.meta.env.VITE_CG_API_KEY_NAME || ''
 const API_KEY: string = import.meta.env.VITE_CG_API_KEY || ''
@@ -19,7 +21,7 @@ onMounted(() => {
 })
 
 onUpdated(() => {
-  console.log('coinsStore.coins', coinsStore.coins)
+  console.log('coins', coins)
 })
 
 const fetchCoinData = async (id: string): Promise<number | null> => {
@@ -79,10 +81,8 @@ const handleCoinSelected = async (value: Coin) => {
           <h1 class="va-h1">COIN AVERAGE</h1>
         </div>
         <div class="center-column">
-          <div class="loading" v-if="coinsStore.loadingCoins">
-            Loading coin...
-          </div>
-          <TablesContainer :portfolio="coinsStore.coins" />
+          <div class="loading" v-if="loadingCoins">Loading coin...</div>
+          <TablesContainer :portfolio="coins" />
         </div>
         <div class="right-column">
           <section>
