@@ -23,7 +23,15 @@ export const useCoinsStore = defineStore('coinsStore', () => {
   }
 
   // ? Add Coin
-  const addCoin = (coin: Coin) => coins.value.push(coin)
+  const addCoin = async (coin: Coin) => {
+    coins.value.push(coin)
+
+    const res = await fetch('http://localhost:3000/coins', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(coin),
+    })
+  }
 
   // ? Remove Coin
   const removeCoin = (coin: Coin) => {
