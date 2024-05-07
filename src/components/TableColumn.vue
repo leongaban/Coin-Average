@@ -60,14 +60,6 @@ const props = defineProps<{
             <button>Add row</button>
           </td>
         </tr>
-        <!-- <tr v-for="user in users" :key="user.id">
-          <td>{{ user.fullName }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.country }}</td>
-          <td>
-            <VaBadge :text="user.status" :color="user.status" />
-          </td>
-        </tr> -->
       </tbody>
     </table>
   </div>

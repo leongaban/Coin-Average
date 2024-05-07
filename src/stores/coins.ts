@@ -24,13 +24,30 @@ export const useCoinsStore = defineStore('coinsStore', () => {
 
   // ? Add Coin
   const addCoin = async (coin: Coin) => {
-    coins.value.push(coin)
+    // Check if the coin already exists in the array
+    const exists = coins.value.some(existingCoin => existingCoin.id === coin.id)
+    if (!exists) {
+      coins.value.push(coin)
 
-    const res = await fetch('http://localhost:3000/coins', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(coin),
-    })
+      await fetch('http://localhost:3000/coins', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(coin),
+      })
+
+      return true
+    } else {
+      console.warn('Attempted to add a coin that already exists:', coin.name)
+      return false
+    }
+  }
+
+  // ? Update Coin Price
+  const updateCoinPrice = (coinId: string, price: number) => {
+    const index = coins.value.findIndex(c => c.id === coinId)
+    if (index !== -1) {
+      coins.value[index].price = price
+    }
   }
 
   // ? Remove Coin
@@ -41,5 +58,13 @@ export const useCoinsStore = defineStore('coinsStore', () => {
     }
   }
 
-  return { name, coins, totalValue, getCoins, addCoin, removeCoin }
+  return {
+    name,
+    coins,
+    totalValue,
+    getCoins,
+    addCoin,
+    updateCoinPrice,
+    removeCoin,
+  }
 })

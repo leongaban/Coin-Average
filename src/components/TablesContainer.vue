@@ -1,48 +1,34 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { defineProps } from 'vue'
 import type { Coin } from '../constants/coins-to-search'
 import TableColumn from './TableColumn.vue'
 import { useCoinsStore } from '../stores/coins'
 
+// Access the coins store
 const coinsStore = useCoinsStore()
 
-const portfolioCoins = ref<Coin[]>([])
+// Define props to receive the coins array
+const props = defineProps<{
+  portfolio: Coin[]
+}>()
 
-const props = defineProps({
-  portfolio: {
-    type: Array as () => Coin[],
-    required: true,
-  },
-})
-
+// Define a method to handle removal of a coin
 const onRemoveCoin = (coinToRemove: Coin) => {
-  // Remove the coin from the local state
-  portfolioCoins.value = portfolioCoins.value.filter(
-    coin => coin.id !== coinToRemove.id,
-  )
-  console.log('Coin removed:', coinToRemove)
-  console.log('portfolioCoins:', portfolioCoins.value)
-  // You can also update other states or stores if necessary
+  // Instead of managing a local state, directly use the store's method to remove a coin
+  coinsStore.removeCoin(coinToRemove)
 }
-
-watch(props.portfolio, (newValue: Coin[]) => {
-  portfolioCoins.value = newValue as Coin[]
-  console.group('Tables')
-  console.log('portfolioCoins:', portfolioCoins.value)
-  console.log('coinStore', coinsStore.coins)
-})
 </script>
 
 <template>
   <div id="tables-container">
     <div class="table-columns">
-      <div v-if="portfolioCoins.length === 0" class="empty-portfolio">
+      <div v-if="props.portfolio.length === 0" class="empty-portfolio">
         <p class="text-center">
           Your portfolio is empty. Search for a coin to add it to your
           portfolio.
         </p>
       </div>
-      <div v-for="coin in portfolioCoins" :key="coin.id" class="coin-table">
+      <div v-for="coin in props.portfolio" :key="coin.id" class="coin-table">
         <TableColumn :coin="coin" @remove="onRemoveCoin" />
       </div>
     </div>

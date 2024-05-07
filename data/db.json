@@ -1,3 +1,19 @@
 {
-  "coins": []
+  "coins": [
+    {
+      "id": "bitcoin",
+      "name": "Bitcoin",
+      "symbol": "btc"
+    },
+    {
+      "id": "ethereum",
+      "name": "Ethereum",
+      "symbol": "eth"
+    },
+    {
+      "id": "solana",
+      "name": "Solana",
+      "symbol": "sol"
+    }
+  ]
 }

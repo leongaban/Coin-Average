@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useToast } from 'vue-toastification'
 import SearchHeader from '../components/SearchHeader.vue'
 import TablesContainer from '../components/TablesContainer.vue'
@@ -12,8 +12,14 @@ const KEY_NAME: string = import.meta.env.VITE_CG_API_KEY_NAME || ''
 const API_KEY: string = import.meta.env.VITE_CG_API_KEY || ''
 
 const selectedCoin = ref<Coin>()
-const portfolioCoins = ref<Coin[]>([])
+// const portfolioCoins = ref<Coin[]>([])
 const toast = useToast()
+
+onMounted(() => {
+  // Check if there are any coins in the store and update the ref
+  // portfolioCoins.value = coinsStore.coins.length > 0 ? coinsStore.coins : []
+  console.log('coinsStore.coins', coinsStore.coins)
+})
 
 const fetchCoinData = async (id: string): Promise<number | null> => {
   try {
@@ -34,33 +40,29 @@ const handleCoinSelected = async (value: Coin) => {
   const searchedCoin = selectedCoin.value
   const { name: coinName, id } = searchedCoin
 
-  // ? Local State
-  portfolioCoins.value.push(searchedCoin)
-  // ? Pinia Store
-  coinsStore.addCoin(searchedCoin)
-  toast.success(`Start tracking ${coinName} in your portfolio!`)
+  // ? Add the coin to the Pinia store
+  const wasAdded = await coinsStore.addCoin(searchedCoin)
+  const errorMessage = `Failed to fetch current price for ${coinName}.`
+
+  if (wasAdded) {
+    toast.success(`Start tracking ${coinName} in your portfolio!`)
+  } else {
+    toast.error(`${coinName} is already in your portfolio.`)
+  }
 
   try {
-    // Fetch the current price for the selected coin
+    // ? Fetch the current price for the selected coin
     const currentPriceUSD = await fetchCoinData(id)
 
     if (currentPriceUSD !== null) {
-      searchedCoin.price = currentPriceUSD
+      coinsStore.updateCoinPrice(id, currentPriceUSD)
     } else {
-      console.warn('Failed to fetch current price for', coinName)
-    }
-
-    // Update the portfolioCoins array with the modified coin object
-    const index = portfolioCoins.value.findIndex(
-      coin => coin.id === searchedCoin.id,
-    )
-    if (index !== -1) {
-      portfolioCoins.value.splice(index, 1, searchedCoin)
-    } else {
-      console.warn('Coin not found in portfolio:', coinName)
+      toast.error(errorMessage)
+      console.warn(errorMessage)
     }
   } catch (error) {
-    console.error('Error handling selected coin:', error)
+    toast.error(errorMessage)
+    console.error(errorMessage, error)
   }
 }
 </script>
@@ -74,7 +76,7 @@ const handleCoinSelected = async (value: Coin) => {
           <h1 class="va-h1">COIN AVERAGE</h1>
         </div>
         <div class="center-column">
-          <TablesContainer :portfolio="portfolioCoins" />
+          <TablesContainer :portfolio="coinsStore.coins" />
         </div>
         <div class="right-column">
           <section>
