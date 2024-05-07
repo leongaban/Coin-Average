@@ -2,7 +2,9 @@
 import { ref, watch } from 'vue'
 import type { Coin } from '../constants/coins-to-search'
 import TableColumn from './TableColumn.vue'
-import { formatPrice } from '../utils/formatters'
+import { useCoinsStore } from '../stores/coins'
+
+const coinsStore = useCoinsStore()
 
 const portfolioCoins = ref<Coin[]>([])
 
@@ -17,9 +19,8 @@ watch(props.portfolio, (newValue: Coin[]) => {
   console.group('Tables')
   portfolioCoins.value = newValue as Coin[]
   console.log('portfolioCoins:', portfolioCoins.value)
+  console.log('coinStore', coinsStore.coins)
 })
-
-console.log('Portfolio:', props.portfolio)
 </script>
 
 <template>

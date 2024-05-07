@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+// import { useCoinsStore } from './stores/coins'
+
+// const taskStore = useCoinsStore()
 </script>
 
 <template>

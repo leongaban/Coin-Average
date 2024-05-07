@@ -2,6 +2,9 @@
 import { ref, watch } from 'vue'
 import coins_to_search from '../constants/coins-to-search'
 import type { Coin } from '../constants/coins-to-search'
+import { useCoinsStore } from '../stores/coins'
+
+const coinsStore = useCoinsStore()
 
 const emit = defineEmits(['coinSelected'])
 const inputValue = ref('')
@@ -58,6 +61,12 @@ const selectCoin = (coin: Coin) => {
           {{ coin.name }}
         </li>
       </ul>
+    </div>
+    <div class="render-state mt-8">
+      <pre class="source-code-pro">
+        <p>{{ coinsStore.name }}</p>
+        <p v-for="coin in coinsStore.coins">{{ coin }}</p>
+      </pre>
     </div>
   </div>
 </template>

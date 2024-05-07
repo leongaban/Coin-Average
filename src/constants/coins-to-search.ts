@@ -3,6 +3,7 @@ export interface Coin {
   name: string
   symbol: string
   price?: number
+  total?: number
 }
 
 const coins_to_search = [

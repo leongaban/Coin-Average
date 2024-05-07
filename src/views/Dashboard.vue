@@ -4,6 +4,9 @@ import { useToast } from 'vue-toastification'
 import SearchHeader from '../components/SearchHeader.vue'
 import TablesContainer from '../components/TablesContainer.vue'
 import type { Coin } from '../constants/coins-to-search'
+import { useCoinsStore } from '../stores/coins'
+
+const coinsStore = useCoinsStore()
 
 const KEY_NAME: string = import.meta.env.VITE_CG_API_KEY_NAME || ''
 const API_KEY: string = import.meta.env.VITE_CG_API_KEY || ''
@@ -30,14 +33,12 @@ const handleCoinSelected = async (value: Coin) => {
   selectedCoin.value = value
   const searchedCoin = selectedCoin.value
   const { name: coinName, id } = searchedCoin
-  portfolioCoins.value.push(searchedCoin)
-  toast.success(`Start tracking ${coinName} in your portfolio!`)
-  // console.group('Dashboard')
-  // console.log('searchedCoin', searchedCoin)
 
-  // const fetchPromises: Promise<any>[] = portfolioCoins.value.map(coin =>
-  //   fetchCoinData(coin.name),
-  // )
+  // ? Local State
+  portfolioCoins.value.push(searchedCoin)
+  // ? Pinia Store
+  coinsStore.addCoin(searchedCoin)
+  toast.success(`Start tracking ${coinName} in your portfolio!`)
 
   try {
     // Fetch the current price for the selected coin
