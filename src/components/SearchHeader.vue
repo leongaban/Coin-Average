@@ -68,7 +68,7 @@ const selectCoin = (coin: Coin) => {
     </div>
     <div class="render-state mt-8">
       <pre class="source-code-pro">
-        <p>{{ coinsStore.name }}</p>
+        <h4>Pinia state: {{ coinsStore.name }}</h4>
         <p v-for="coin in coinsStore.coins">{{ coin }}</p>
       </pre>
     </div>

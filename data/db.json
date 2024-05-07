@@ -14,6 +14,16 @@
       "id": "solana",
       "name": "Solana",
       "symbol": "sol"
+    },
+    {
+      "id": "ethereum",
+      "name": "Ethereum",
+      "symbol": "eth"
+    },
+    {
+      "id": "dogecoin",
+      "name": "Dogecoin",
+      "symbol": "doge"
     }
   ]
 }
