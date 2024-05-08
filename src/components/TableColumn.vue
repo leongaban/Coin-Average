@@ -32,6 +32,10 @@ const addCoinRow = () => {
     price: Number(priceVal.value),
     total: Number(amountVal.value) * Number(priceVal.value),
   })
+
+  dateVal.value = ''
+  amountVal.value = ''
+  priceVal.value = ''
 }
 
 const removeCoin = () => emits('remove', props.coin)
@@ -58,9 +62,11 @@ const props = defineProps<{
         </tr>
       </thead>
       <tbody>
-        <tr v-for="coinRow in coinRows" :key="coinRow.id">
-          <TableRow :coinRow="coinRow" />
-        </tr>
+        <TableRow
+          v-for="coinRow in coinRows"
+          :key="coinRow.id"
+          :coinRow="coinRow"
+        />
 
         <tr>
           <td class="td-date">
