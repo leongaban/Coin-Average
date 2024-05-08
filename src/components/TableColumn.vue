@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { defineProps } from 'vue'
 import type { Coin, CoinRow } from '../types/coins'
 import { formatPrice } from '../utils/formatters'
 import TableRow from './TableRow.vue'
+import { useCoinsStore } from '../stores/coins'
 
+const coinsStore = useCoinsStore()
 const dateVal = ref('')
 const amountVal = ref('')
 const priceVal = ref('')
@@ -20,6 +22,10 @@ const total = computed(() => {
   }
 
   return formatPrice(amount * price)
+})
+
+onMounted(() => {
+  coinsStore.getCoins()
 })
 
 const addCoinRow = () => {
@@ -49,7 +55,8 @@ const props = defineProps<{
   <div class="va-table-responsive">
     <div class="table-col-header">
       <h2>{{ coin.name }}</h2>
-      <button class="btn-remove-coin" @click="removeCoin">Remove Coin</button>
+      <div class="coin-portfolio-value">Portfolio Value: $100,000</div>
+      <button class="btn-remove-coin" @click="removeCoin">✖</button>
     </div>
     <p>Current price: {{ formatPrice(coin.price) }}</p>
     <table class="va-table">
