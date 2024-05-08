@@ -10,6 +10,7 @@ const coinsStore = useCoinsStore()
 const dateVal = ref('')
 const amountVal = ref('')
 const priceVal = ref('')
+const coinPortfolioVal = ref(0)
 const coinRows = ref<CoinRow[]>([])
 const emits = defineEmits(['remove'])
 
@@ -29,8 +30,6 @@ onMounted(() => {
 })
 
 const addCoinRow = () => {
-  console.log(dateVal.value, amountVal.value, priceVal.value)
-
   coinRows.value.push({
     id: Math.random().toString(36).substr(2, 9),
     date: dateVal.value,
@@ -38,6 +37,11 @@ const addCoinRow = () => {
     price: Number(priceVal.value),
     total: Number(amountVal.value) * Number(priceVal.value),
   })
+
+  coinPortfolioVal.value = coinRows.value.reduce(
+    (acc, row) => acc + row.total,
+    0,
+  )
 
   dateVal.value = ''
   amountVal.value = ''
@@ -55,7 +59,9 @@ const props = defineProps<{
   <div class="va-table-responsive">
     <div class="table-col-header">
       <h2>{{ coin.name }}</h2>
-      <div class="coin-portfolio-value">Portfolio Value: $100,000</div>
+      <div class="coin-portfolio-value">
+        Portfolio: {{ formatPrice(coinPortfolioVal) }}
+      </div>
       <button class="btn-remove-coin" @click="removeCoin">✖</button>
     </div>
     <p>Current price: {{ formatPrice(coin.price) }}</p>
