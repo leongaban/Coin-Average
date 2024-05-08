@@ -4,21 +4,42 @@
       "id": "bitcoin",
       "name": "Bitcoin",
       "symbol": "btc",
-      "price": 62296,
+      "price": 68227,
       "coinRows": [
         {
           "id": "bitcoin",
-          "date": "2024-05-01",
-          "amount": 1,
-          "price": 54548,
-          "total": 54548
+          "date": "2024-05-24",
+          "amount": 111,
+          "price": 2112321,
+          "total": 234467631
         },
         {
           "id": "bitcoin",
-          "date": "2024-05-08",
-          "amount": 2,
-          "price": 45848,
-          "total": 91696
+          "date": "2024-05-03",
+          "amount": 112,
+          "price": 33243,
+          "total": 3723216
+        }
+      ]
+    },
+    {
+      "id": "solana",
+      "name": "Solana",
+      "symbol": "sol",
+      "coinRows": [
+        {
+          "id": "solana",
+          "date": "2024-04-29",
+          "amount": 13,
+          "price": 314312,
+          "total": 4086056
+        },
+        {
+          "id": "solana",
+          "date": "2024-05-22",
+          "amount": 34,
+          "price": 1234,
+          "total": 41956
         }
       ]
     }

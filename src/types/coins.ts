@@ -5,6 +5,7 @@ export interface Coin {
   price?: number
   total?: number
   coinRows?: CoinRow[]
+  avgPrice?: number
 }
 
 export interface CoinRow {

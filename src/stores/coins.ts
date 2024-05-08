@@ -107,7 +107,6 @@ export const useCoinsStore = defineStore('coinsStore', () => {
   const addCoinRow = async (coinRow: CoinRow): Promise<boolean> => {
     const coinUrl = `http://localhost:3000/coins/${coinRow.id}`
     try {
-      // Fetch the current coin data
       let response = await fetch(coinUrl)
       let coin = await response.json()
 
@@ -115,10 +114,8 @@ export const useCoinsStore = defineStore('coinsStore', () => {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
 
-      // Add the new CoinRow to the coin
       coin.coinRows = [...(coin.coinRows || []), coinRow]
 
-      // Update the coin with the new CoinRow list
       response = await fetch(coinUrl, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },

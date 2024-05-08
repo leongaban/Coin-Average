@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, onUpdated } from 'vue'
 import { defineProps } from 'vue'
+import { storeToRefs } from 'pinia'
 import type { Coin, CoinRow } from '../types/coins'
 import { formatPrice } from '../utils/formatters'
 import TableRow from './TableRow.vue'
@@ -10,6 +11,7 @@ const coinsStore = useCoinsStore()
 const dateVal = ref('')
 const amountVal = ref('')
 const priceVal = ref('')
+const avgPriceVal = ref('')
 const coinPortfolioVal = ref(0)
 const coinRows = ref<CoinRow[]>([])
 const emits = defineEmits(['remove'])
@@ -25,8 +27,31 @@ const total = computed(() => {
   return formatPrice(amount * price)
 })
 
+const { coins } = storeToRefs(coinsStore)
+
 onMounted(() => {
   coinsStore.getCoins()
+  console.log('TableColumn onUpdated coins:', coins)
+
+  if (coins.value && coins.value.length > 0) {
+    const coin = coins.value.find(coin => coin.id === props.coin.id)
+    if (coin && coin.coinRows) {
+      coinRows.value = coin.coinRows
+      coinPortfolioVal.value = coin.coinRows.reduce(
+        (acc, row) => acc + row.total,
+        0,
+      )
+    }
+  }
+  const totalAmount = coinRows.value.reduce((acc, row) => acc + row.amount, 0)
+
+  const totalPrice = coinRows.value.reduce((acc, row) => acc + row.total, 0)
+
+  avgPriceVal.value = (totalPrice / totalAmount).toFixed(2)
+})
+
+onUpdated(() => {
+  // console.log('TableColumn onUpdated coins:', coins)
 })
 
 const addCoinRow = () => {
@@ -69,6 +94,7 @@ const props = defineProps<{
       <button class="btn-remove-coin" @click="removeCoin">✖</button>
     </div>
     <p>Current price: {{ formatPrice(coin.price) }}</p>
+    <p>Average price: ${{ avgPriceVal }}</p>
     <table class="va-table">
       <thead>
         <tr>

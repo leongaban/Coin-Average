@@ -49,6 +49,8 @@ const handleCoinSelected = async (value: Coin) => {
   const wasAdded = await coinsStore.addCoin(searchedCoin)
   const errorMessage = `Failed to fetch current price for ${coinName}.`
 
+  console.log('wasAdded:', wasAdded)
+
   if (wasAdded) {
     toast.success(`Start tracking ${coinName} in your portfolio!`)
   } else {
