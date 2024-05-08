@@ -4,6 +4,7 @@ export interface Coin {
   symbol: string
   price?: number
   total?: number
+  coinRows?: CoinRow[]
 }
 
 export interface CoinRow {

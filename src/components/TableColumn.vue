@@ -30,18 +30,22 @@ onMounted(() => {
 })
 
 const addCoinRow = () => {
-  coinRows.value.push({
-    id: Math.random().toString(36).substr(2, 9),
+  const coinRowObject = {
+    id: props.coin.id,
     date: dateVal.value,
     amount: Number(amountVal.value),
     price: Number(priceVal.value),
     total: Number(amountVal.value) * Number(priceVal.value),
-  })
+  }
+
+  coinRows.value.push(coinRowObject)
 
   coinPortfolioVal.value = coinRows.value.reduce(
     (acc, row) => acc + row.total,
     0,
   )
+
+  coinsStore.addCoinRow(coinRowObject)
 
   dateVal.value = ''
   amountVal.value = ''

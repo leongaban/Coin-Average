@@ -3,7 +3,24 @@
     {
       "id": "bitcoin",
       "name": "Bitcoin",
-      "symbol": "btc"
+      "symbol": "btc",
+      "price": 62296,
+      "coinRows": [
+        {
+          "id": "bitcoin",
+          "date": "2024-05-01",
+          "amount": 1,
+          "price": 54548,
+          "total": 54548
+        },
+        {
+          "id": "bitcoin",
+          "date": "2024-05-08",
+          "amount": 2,
+          "price": 45848,
+          "total": 91696
+        }
+      ]
     }
   ]
 }

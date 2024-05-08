@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import type { Coin } from '../types/coins'
+import type { Coin, CoinRow } from '../types/coins'
 
 export const useCoinsStore = defineStore('coinsStore', () => {
   const name = 'coinsStore'
@@ -51,10 +51,39 @@ export const useCoinsStore = defineStore('coinsStore', () => {
   }
 
   // ? Update Coin Price
-  const updateCoinPrice = (coinId: string, price: number) => {
+  const updateCoinPrice = async (
+    coinId: string,
+    price: number,
+  ): Promise<boolean> => {
     const index = coins.value.findIndex(c => c.id === coinId)
-    if (index !== -1) {
-      coins.value[index].price = price
+    if (index === -1) {
+      console.warn('Coin not found:', coinId)
+      return false
+    }
+
+    coins.value[index].price = price
+
+    const patchData = {
+      price: price,
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3000/coins/${coinId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(patchData),
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      console.log('Price updated successfully:', coinId, price)
+      return true
+    } catch (error) {
+      console.error('Failed to update coin price:', coinId, error)
+      coins.value[index].price = coins.value[index].price
+      return false
     }
   }
 
@@ -71,6 +100,40 @@ export const useCoinsStore = defineStore('coinsStore', () => {
 
     if (!res.ok) {
       console.error(res.statusText)
+    }
+  }
+
+  // ? Add CoinRow to Coin
+  const addCoinRow = async (coinRow: CoinRow): Promise<boolean> => {
+    const coinUrl = `http://localhost:3000/coins/${coinRow.id}`
+    try {
+      // Fetch the current coin data
+      let response = await fetch(coinUrl)
+      let coin = await response.json()
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      // Add the new CoinRow to the coin
+      coin.coinRows = [...(coin.coinRows || []), coinRow]
+
+      // Update the coin with the new CoinRow list
+      response = await fetch(coinUrl, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(coin),
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      console.log('CoinRow added successfully:', coinRow)
+      return true
+    } catch (error) {
+      console.error('Failed to add CoinRow:', coinRow, error)
+      return false
     }
   }
 
@@ -103,6 +166,7 @@ export const useCoinsStore = defineStore('coinsStore', () => {
     addCoin,
     updateCoinPrice,
     removeCoin,
+    addCoinRow,
     resetState,
   }
 })
