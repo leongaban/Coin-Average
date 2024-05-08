@@ -24,6 +24,14 @@ const total = computed(() => {
 
 const addCoinRow = () => {
   console.log(dateVal.value, amountVal.value, priceVal.value)
+
+  coinRows.value.push({
+    id: Math.random().toString(36).substr(2, 9),
+    date: dateVal.value,
+    amount: Number(amountVal.value),
+    price: Number(priceVal.value),
+    total: Number(amountVal.value) * Number(priceVal.value),
+  })
 }
 
 const removeCoin = () => emits('remove', props.coin)
