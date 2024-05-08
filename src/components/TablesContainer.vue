@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps } from 'vue'
-import type { Coin } from '../constants/coins-to-search'
+import type { Coin } from '../types/coins'
 import TableColumn from './TableColumn.vue'
 import { useCoinsStore } from '../stores/coins'
 

@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import type { Coin } from '../constants/coins-to-search'
+import type { Coin } from '../types/coins'
 
 export const useCoinsStore = defineStore('coinsStore', () => {
   const name = 'coinsStore'

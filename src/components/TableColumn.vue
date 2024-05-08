@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { defineProps } from 'vue'
-import type { Coin } from '../constants/coins-to-search'
+import type { Coin, CoinRow } from '../types/coins'
 import { formatPrice } from '../utils/formatters'
+import TableRow from './TableRow.vue'
 
+const dateVal = ref('')
 const amountVal = ref('')
 const priceVal = ref('')
+const coinRows = ref<CoinRow[]>([])
 const emits = defineEmits(['remove'])
 
 const total = computed(() => {
@@ -18,6 +21,10 @@ const total = computed(() => {
 
   return formatPrice(amount * price)
 })
+
+const addCoinRow = () => {
+  console.log(dateVal.value, amountVal.value, priceVal.value)
+}
 
 const removeCoin = () => emits('remove', props.coin)
 
@@ -43,9 +50,13 @@ const props = defineProps<{
         </tr>
       </thead>
       <tbody>
+        <tr v-for="coinRow in coinRows" :key="coinRow.id">
+          <TableRow :coinRow="coinRow" />
+        </tr>
+
         <tr>
           <td class="td-date">
-            <input type="date" />
+            <input type="date" v-model="dateVal" />
           </td>
           <td class="td-amount">
             <input type="number" v-model="amountVal" />
@@ -57,7 +68,7 @@ const props = defineProps<{
         </tr>
         <tr class="td-button">
           <td colspan="4">
-            <button>Add row</button>
+            <button @click="addCoinRow">Add row</button>
           </td>
         </tr>
       </tbody>

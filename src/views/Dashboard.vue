@@ -4,7 +4,7 @@ import { ref, onMounted, onUpdated } from 'vue'
 import { useToast } from 'vue-toastification'
 import SearchHeader from '../components/SearchHeader.vue'
 import TablesContainer from '../components/TablesContainer.vue'
-import type { Coin } from '../constants/coins-to-search'
+import type { Coin } from '../types/coins'
 import { useCoinsStore } from '../stores/coins'
 
 const coinsStore = useCoinsStore()
@@ -21,7 +21,7 @@ onMounted(() => {
 })
 
 onUpdated(() => {
-  console.log('coins', coins)
+  // console.log('Dashboard onUpdated coins:', coins)
 })
 
 const fetchCoinData = async (id: string): Promise<number | null> => {

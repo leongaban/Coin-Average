@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import coins_to_search from '../constants/coins-to-search'
-import type { Coin } from '../constants/coins-to-search'
+import type { Coin } from '../types/coins'
 import { useCoinsStore } from '../stores/coins'
 
 const coinsStore = useCoinsStore()

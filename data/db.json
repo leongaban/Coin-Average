@@ -1,3 +1,9 @@
 {
-  "coins": []
+  "coins": [
+    {
+      "id": "bitcoin",
+      "name": "Bitcoin",
+      "symbol": "btc"
+    }
+  ]
 }

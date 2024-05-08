@@ -1,11 +1,3 @@
-export interface Coin {
-  id: string
-  name: string
-  symbol: string
-  price?: number
-  total?: number
-}
-
 const coins_to_search = [
   {
     id: 'bitcoin',
