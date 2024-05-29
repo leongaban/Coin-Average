@@ -29,3 +29,8 @@ const formattedPrice = computed({
     <td class="td-total">{{ formatPrice(coinRow.total) }}</td>
   </tr>
 </template>
+
+<!-- TODO
+  - TODO 1: Changing Amount or Price should update the Total and Portfolio Value
+  - TODO 2: Changing Date should update the CoinRow
+-->

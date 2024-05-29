@@ -28,3 +28,17 @@ button {
     display: none;
   }
 }
+
+.wrapper {
+  nav {
+    margin-top: 10px;
+    a {
+      margin: 0 10px;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}

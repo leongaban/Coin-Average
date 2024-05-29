@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { ref, onMounted, onUpdated } from 'vue'
+// import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 import SearchHeader from '../components/SearchHeader.vue'
 import TablesContainer from '../components/TablesContainer.vue'
@@ -9,6 +10,7 @@ import { useCoinsStore } from '../stores/coins'
 
 const coinsStore = useCoinsStore()
 const { coins, loadingCoins } = storeToRefs(coinsStore)
+// const router = useRouter()
 
 const KEY_NAME: string = import.meta.env.VITE_CG_API_KEY_NAME || ''
 const API_KEY: string = import.meta.env.VITE_CG_API_KEY || ''
