@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onUpdated } from 'vue'
-import { defineProps } from 'vue'
 import { storeToRefs } from 'pinia'
 import type { Coin, CoinRow } from '../types/coins'
 import { formatPrice } from '../utils/formatters'
@@ -15,6 +14,10 @@ const avgPriceVal = ref('')
 const coinPortfolioVal = ref(0)
 const coinRows = ref<CoinRow[]>([])
 const emits = defineEmits(['remove'])
+
+const props = defineProps<{
+  coin: Coin
+}>()
 
 const total = computed(() => {
   const amount = Number(amountVal.value)
@@ -78,10 +81,6 @@ const addCoinRow = () => {
 }
 
 const removeCoin = () => emits('remove', props.coin)
-
-const props = defineProps<{
-  coin: Coin
-}>()
 </script>
 
 <template>
