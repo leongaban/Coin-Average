@@ -15,7 +15,7 @@ export const useCoinsStore = defineStore('coinsStore', () => {
   const getCoins = async () => {
     try {
       loadingCoins.value = true
-      const res = await fetch('http://localhost:3000/coins')
+      const res = await fetch('http://localhost:4000/coins')
       const data = await res.json()
       loadingCoins.value = false
       coins.value = data
@@ -26,13 +26,14 @@ export const useCoinsStore = defineStore('coinsStore', () => {
 
   // ? Add Coin
   const addCoin = async (coin: Coin): Promise<boolean> => {
+    console.log('coin', coin)
     const exists = coins.value.some(existingCoin => existingCoin.id === coin.id)
     if (!exists) {
       coins.value = [...coins.value, coin]
 
       loadingCoins.value = true
       try {
-        await fetch('http://localhost:3000/coins', {
+        await fetch('http://localhost:4000/coins', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(coin),
@@ -68,7 +69,7 @@ export const useCoinsStore = defineStore('coinsStore', () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/coins/${coinId}`, {
+      const response = await fetch(`http://localhost:4000/coins/${coinId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(patchData),
@@ -94,7 +95,7 @@ export const useCoinsStore = defineStore('coinsStore', () => {
       coins.value.splice(index, 1)
     }
 
-    const res = await fetch(`http://localhost:3000/coins/${coin.id}`, {
+    const res = await fetch(`http://localhost:4000/coins/${coin.id}`, {
       method: 'DELETE',
     })
 
@@ -105,7 +106,7 @@ export const useCoinsStore = defineStore('coinsStore', () => {
 
   // ? Add CoinRow to Coin
   const addCoinRow = async (coinRow: CoinRow): Promise<boolean> => {
-    const coinUrl = `http://localhost:3000/coins/${coinRow.id}`
+    const coinUrl = `http://localhost:4000/coins/${coinRow.id}`
     try {
       let response = await fetch(coinUrl)
       let coin = await response.json()
@@ -139,7 +140,7 @@ export const useCoinsStore = defineStore('coinsStore', () => {
     const currentCoins = [...coins.value]
     for (const coin of currentCoins) {
       try {
-        const res = await fetch(`http://localhost:3000/coins/${coin.id}`, {
+        const res = await fetch(`http://localhost:4000/coins/${coin.id}`, {
           method: 'DELETE',
         })
         if (!res.ok) throw new Error(res.statusText)
