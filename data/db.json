@@ -1,45 +1,24 @@
 {
   "coins": [
     {
-      "id": "bitcoin",
-      "name": "Bitcoin",
-      "symbol": "btc",
-      "price": 68227,
+      "id": "ethereum",
+      "name": "Ethereum",
+      "symbol": "eth",
+      "price": 3799.96,
       "coinRows": [
         {
-          "id": "bitcoin",
-          "date": "2024-05-24",
-          "amount": 111,
-          "price": 2112321,
-          "total": 234467631
+          "id": "ethereum",
+          "date": "2024-06-01",
+          "amount": 100,
+          "price": 1344,
+          "total": 134400
         },
         {
-          "id": "bitcoin",
-          "date": "2024-05-03",
-          "amount": 112,
-          "price": 33243,
-          "total": 3723216
-        }
-      ]
-    },
-    {
-      "id": "solana",
-      "name": "Solana",
-      "symbol": "sol",
-      "coinRows": [
-        {
-          "id": "solana",
-          "date": "2024-04-29",
-          "amount": 13,
-          "price": 314312,
-          "total": 4086056
-        },
-        {
-          "id": "solana",
-          "date": "2024-05-22",
-          "amount": 34,
-          "price": 1234,
-          "total": 41956
+          "id": "ethereum",
+          "date": "",
+          "amount": 0,
+          "price": 0,
+          "total": 0
         }
       ]
     }

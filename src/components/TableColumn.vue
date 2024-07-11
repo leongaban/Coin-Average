@@ -34,7 +34,10 @@ const { coins } = storeToRefs(coinsStore)
 
 onMounted(() => {
   coinsStore.getCoins()
-  console.log('TableColumn onUpdated coins:', coins)
+  console.log(
+    `TableColumn onMounted coins for coin: ${props.coin.name}:`,
+    coins.value,
+  )
 
   if (coins.value && coins.value.length > 0) {
     const coin = coins.value.find(coin => coin.id === props.coin.id)

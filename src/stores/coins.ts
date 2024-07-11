@@ -117,6 +117,9 @@ export const useCoinsStore = defineStore('coinsStore', () => {
 
       coin.coinRows = [...(coin.coinRows || []), coinRow]
 
+      console.log('addCoinRow:', coinRow)
+      console.log('CoinRow added:', coin)
+
       response = await fetch(coinUrl, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
